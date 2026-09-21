@@ -1,0 +1,28 @@
+<header class="site-header">
+  <div class="container bar">
+    <a routerLink="/" class="brand">Vaga<span>Match</span></a>
+
+    <nav class="nav">
+      @if (auth.isLoggedIn()) {
+        <a routerLink="/painel" class="navlink">Painel</a>
+        @if (auth.isAdmin()) {
+          <a routerLink="/admin" class="navlink">Admin</a>
+        }
+        <span class="who">{{ auth.user()?.email }}</span>
+        <button class="btn btn-ghost small" type="button" (click)="auth.logout()">Sair</button>
+      } @else {
+        <a routerLink="/login" class="btn btn-primary small">Entrar</a>
+      }
+    </nav>
+  </div>
+</header>
+
+<main>
+  <router-outlet />
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    VagaMatch · Java 21 + Spring Boot + PostgreSQL/pgvector + Angular 19
+  </div>
+</footer>

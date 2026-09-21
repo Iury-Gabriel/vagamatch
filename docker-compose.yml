@@ -1,0 +1,20 @@
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: vagamatch-db
+    environment:
+      POSTGRES_DB: vagamatch
+      POSTGRES_USER: vagamatch
+      POSTGRES_PASSWORD: vagamatch
+    ports:
+      - "5434:5432"
+    volumes:
+      - vagamatch_db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U vagamatch -d vagamatch"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  vagamatch_db:
